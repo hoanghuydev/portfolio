@@ -3,7 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trần Võ Hoàng Huy - Fullstack Developer Portfolio</title>
+    <title>Trần Võ Hoàng Huy - Fullstack Developer (React, Node, Laravel)</title>
+    <meta name="description" content="Fullstack Developer tại TP.HCM chuyên xây dựng CRM & eCommerce hiệu suất cao. Kinh nghiệm tối ưu tốc độ, SEO on-page và các giải pháp web phức tạp. Liên hệ!">
+    <meta name="keywords" content="fullstack developer, react developer, nodejs developer, laravel developer, crm development, ecommerce development, ho chi minh city, vietnam developer, web development, seo optimization">
+    <meta name="author" content="Trần Võ Hoàng Huy">
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#0f1419">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://hoanghuydev.vercel.app/">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="/images/avatar.jpg">
+    <link rel="apple-touch-icon" href="/images/avatar.jpg">
+    
+    <!-- Open Graph Tags -->
+    <meta property="og:title" content="Trần Võ Hoàng Huy - Fullstack Developer">
+    <meta property="og:description" content="Fullstack Developer tại TP.HCM chuyên xây dựng CRM & eCommerce hiệu suất cao. Kinh nghiệm tối ưu tốc độ, SEO on-page và các giải pháp web phức tạp.">
+    <meta property="og:image" content="https://hoanghuydev.vercel.app/images/cover_image.jpg">
+    <meta property="og:url" content="https://hoanghuydev.vercel.app/">
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="Trần Võ Hoàng Huy Portfolio">
+    <meta property="og:locale" content="vi_VN">
+    
+    <!-- Twitter Card Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Trần Võ Hoàng Huy - Fullstack Developer">
+    <meta name="twitter:description" content="Fullstack Developer tại TP.HCM chuyên xây dựng CRM & eCommerce hiệu suất cao. Kinh nghiệm tối ưu tốc độ, SEO on-page và các giải pháp web phức tạp.">
+    <meta name="twitter:image" content="https://hoanghuydev.vercel.app/images/cover_image.jpg">
+    <meta name="twitter:creator" content="@hoanghuydev">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="/css/style.css" as="style">
+    <link rel="preload" href="/images/avatar.jpg" as="image">
+    
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="/css/loading.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -16,13 +49,56 @@
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/shaders/LuminosityHighPassShader.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
     
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Trần Võ Hoàng Huy",
+        "jobTitle": "Fullstack Developer",
+        "description": "Fullstack Developer tại TP.HCM chuyên xây dựng CRM & eCommerce hiệu suất cao. Kinh nghiệm tối ưu tốc độ, SEO on-page và các giải pháp web phức tạp.",
+        "url": "https://hoanghuydev.vercel.app/",
+        "image": "https://hoanghuydev.vercel.app/images/avatar.jpg",
+        "sameAs": [
+            "https://github.com/hoanghuydev",
+            "https://linkedin.com/in/hoanghuydev",
+            "https://facebook.com/hoanghuydev"
+        ],
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Ho Chi Minh City",
+            "addressCountry": "Vietnam"
+        },
+        "email": "tranvohoanghuydev@gmail.com",
+        "knowsAbout": [
+            "React.js",
+            "Node.js",
+            "Laravel",
+            "PHP",
+            "JavaScript",
+            "TypeScript",
+            "MySQL",
+            "PostgreSQL",
+            "MongoDB",
+            "CRM Development",
+            "E-commerce Development",
+            "SEO Optimization",
+            "Web Development"
+        ],
+        "worksFor": {
+            "@type": "Organization",
+            "name": "Freelance Developer"
+        }
+    }
+    </script>
+    
 </head>
 <body class="loading">
     <!-- Loading Screen -->
-    <div id="loading-screen">
+    <div id="loading-screen" role="dialog" aria-label="Trang đang tải" aria-live="polite">
         <div class="loading-container">
             <div class="loading-logo">
-                <img src="images/avatar.jpg" alt="Loading Avatar" class="loading-avatar">
+                <img src="/images/avatar.jpg" alt="Avatar của Trần Võ Hoàng Huy - Fullstack Developer" class="loading-avatar">
                 <h2>Trần Võ Hoàng Huy</h2>
                 <p>Portfolio đang được tải...</p>
             </div>
@@ -51,81 +127,81 @@
 
     <canvas id="bg-canvas"></canvas>
 
-    <header>
+    <header role="banner">
         <div class="container">
-            <nav>
-                <a class="logo" data-page="home-page">
-                    <img src="images/avatar.jpg" alt="Avatar" class="logo-img">
+            <nav role="navigation" aria-label="Menu chính">
+                <a class="logo" data-page="home-page" aria-label="Về trang chủ">
+                    <img src="/images/avatar.jpg" alt="Logo - Avatar của Trần Võ Hoàng Huy" class="logo-img">
                 </a>
-                <ul>
-                    <li><a data-page="home-page" class="nav-link active">Trang chủ</a></li>
-                    <li><a data-page="about-page" class="nav-link">Giới thiệu</a></li>
-                    <li><a data-page="projects-page" class="nav-link">Dự án</a></li>
-                    <li><a data-page="contact-page" class="nav-link">Liên hệ</a></li>
+                <ul role="menubar">
+                    <li role="none"><a data-page="home-page" class="nav-link active" role="menuitem" aria-current="page">Trang chủ</a></li>
+                    <li role="none"><a data-page="about-page" class="nav-link" role="menuitem">Giới thiệu</a></li>
+                    <li role="none"><a data-page="projects-page" class="nav-link" role="menuitem">Dự án</a></li>
+                    <li role="none"><a data-page="contact-page" class="nav-link" role="menuitem">Liên hệ</a></li>
                 </ul>
             </nav>
         </div>
     </header>
 
-    <main>
+    <main role="main">
         <!-- Trang Chủ -->
-        <section id="home-page" class="page active">
+        <section id="home-page" class="page active" role="region" aria-labelledby="home-heading">
             <div class="container">
                 <p style="font-family: 'Orbitron', sans-serif; color: var(--accent-color); font-size: 1.2rem;">Xin chào, tôi là</p>
-                <h1 class="name">Trần Võ Hoàng Huy.</h1>
-                <h1 class="subtitle">Tôi xây dựng các ứng dụng cho web.</h1>
+                <h1 id="home-heading" class="name">Trần Võ Hoàng Huy.</h1>
+                <h2 class="subtitle">Tôi xây dựng các ứng dụng cho web.</h2>
                 <p>Tôi là một Full-Stack Web Developer (Freelance) với hơn 1 năm kinh nghiệm tại TP.HCM. Chuyên môn của tôi là xây dựng các hệ thống CRM, nền tảng eCommerce, và các ứng dụng web phức tạp, bao gồm các tính năng tự động hóa, chat thời gian thực, video call, và livestream.</p>
-                <a class="cta-button" data-page="projects-page">Xem các dự án của tôi</a>
+                <a class="cta-button" data-page="projects-page" role="button" aria-label="Xem danh sách các dự án đã thực hiện">Xem các dự án của tôi</a>
             </div>
         </section>
 
         <!-- Trang Giới Thiệu -->
-        <section id="about-page" class="page">
+        <section id="about-page" class="page" role="region" aria-labelledby="about-heading">
             <div class="container">
-                <h2 class="page-title">Giới thiệu</h2>
+                <h2 id="about-heading" class="page-title">Giới thiệu</h2>
                 <div class="about-content">
                     <div>
                         <p>Với kinh nghiệm thực tế, tôi có khả năng phát triển các công cụ tự động hóa đơn giản, các tính năng chat thời gian thực, video call, livestream và chỉnh sửa video. Tôi luôn tìm tòi, học hỏi những công nghệ mới để tạo ra các giải pháp hiệu quả và tối ưu, đáp ứng nhu cầu của người dùng và doanh nghiệp.</p>
                         <p style="margin-top: 20px;">Tôi tin rằng một sản phẩm tốt không chỉ cần code sạch mà còn phải mang lại trải nghiệm người dùng tuyệt vời và giải quyết được các bài toán kinh doanh thực tế.</p>
                     </div>
                     <div>
-                        <div class="skills-category">
-                            <h3>Frontend</h3>
-                            <ul class="skills-grid">
-                                <li>React.js</li>
-                                <li>Next.js</li>
-                                <li>TypeScript</li>
-                                <li>JavaScript</li>
-                                <li>Tailwind CSS</li>
-                                <li>Three.js</li>
-                                <li>jQuery</li>
-                                <li>Figma</li>
+                        <div class="skills-category" role="region" aria-labelledby="frontend-skills">
+                            <h3 id="frontend-skills">Frontend</h3>
+                            <ul class="skills-grid" role="list" aria-label="Danh sách kỹ năng Frontend">
+                                <li role="listitem">React.js</li>
+                                <li role="listitem">Next.js</li>
+                                <li role="listitem">TypeScript</li>
+                                <li role="listitem">JavaScript</li>
+                                <li role="listitem">Tailwind CSS</li>
+                                <li role="listitem">Three.js</li>
+                                <li role="listitem">jQuery</li>
+                                <li role="listitem">Figma</li>
                             </ul>
                         </div>
-                        <div class="skills-category">
-                            <h3>Backend</h3>
-                            <ul class="skills-grid">
-                                <li>Node.js</li>
-                                <li>NestJS</li>
-                                <li>Laravel (PHP)</li>
-                                <li>Spring Boot (Java)</li>
-                                <li>MySQL</li>
-                                <li>PostgreSQL</li>
-                                <li>MongoDB</li>
-                                <li>Redis</li>
-                                <li>WebSocket</li>
-                                <li>Kafka</li>
+                        <div class="skills-category" role="region" aria-labelledby="backend-skills">
+                            <h3 id="backend-skills">Backend</h3>
+                            <ul class="skills-grid" role="list" aria-label="Danh sách kỹ năng Backend">
+                                <li role="listitem">Node.js</li>
+                                <li role="listitem">NestJS</li>
+                                <li role="listitem">Laravel (PHP)</li>
+                                <li role="listitem">Spring Boot (Java)</li>
+                                <li role="listitem">MySQL</li>
+                                <li role="listitem">PostgreSQL</li>
+                                <li role="listitem">MongoDB</li>
+                                <li role="listitem">Redis</li>
+                                <li role="listitem">WebSocket</li>
+                                <li role="listitem">Kafka</li>
                             </ul>
                         </div>
-                        <div class="skills-category">
-                            <h3>DevOps & Infrastructure</h3>
-                            <ul class="skills-grid">
-                                <li>Docker</li>
-                                <li>CI/CD (Github Actions)</li>
-                                <li>Nginx</li>
-                                <li>AWS</li>
-                                <li>Firebase</li>
-                                <li>Git</li>
+                        <div class="skills-category" role="region" aria-labelledby="devops-skills">
+                            <h3 id="devops-skills">DevOps & Infrastructure</h3>
+                            <ul class="skills-grid" role="list" aria-label="Danh sách kỹ năng DevOps">
+                                <li role="listitem">Docker</li>
+                                <li role="listitem">CI/CD (Github Actions)</li>
+                                <li role="listitem">Nginx</li>
+                                <li role="listitem">AWS</li>
+                                <li role="listitem">Firebase</li>
+                                <li role="listitem">Git</li>
                             </ul>
                         </div>
                     </div>
@@ -134,97 +210,97 @@
         </section>
 
         <!-- Trang Dự Án -->
-        <section id="projects-page" class="page">
+        <section id="projects-page" class="page" role="region" aria-labelledby="projects-heading">
             <div class="container">
-                <h2 class="page-title">Dự án nổi bật</h2>
-                <div class="projects-grid">
+                <h2 id="projects-heading" class="page-title">Dự án nổi bật</h2>
+                <div class="projects-grid" role="list" aria-label="Danh sách các dự án đã thực hiện">
                     
-                    <div class="project-card">
+                    <article class="project-card" role="listitem">
                         <h3 class="project-title">Hệ thống CRM - manager.cosan.vn</h3>
                         <p class="project-role">Fullstack Developer | PHP, jQuery, MySQL, React.js</p>
                         <div class="project-description">
-                            <ul>
-                                <li>Phát triển và duy trì hệ thống CRM tùy chỉnh để hỗ trợ bán hàng, dịch vụ khách hàng và vận hành nội bộ.</li>
-                                <li>Tích hợp nhiều API của bên thứ ba (TikTok, Zalo ZNS, GHTK,...) để tự động hóa quy trình làm việc.</li>
-                                <li>Triển khai các tính năng chỉnh sửa video bằng FFmpeg, gọi video trực tiếp qua WebRTC, và livestream bằng Nginx RTMP.</li>
-                                <li>Tích hợp các API AI để chấm điểm nhân viên và chấm công bằng nhận diện khuôn mặt.</li>
+                            <ul role="list" aria-label="Các tính năng chính của dự án CRM">
+                                <li role="listitem">Phát triển và duy trì hệ thống CRM tùy chỉnh để hỗ trợ bán hàng, dịch vụ khách hàng và vận hành nội bộ.</li>
+                                <li role="listitem">Tích hợp nhiều API của bên thứ ba (TikTok, Zalo ZNS, GHTK,...) để tự động hóa quy trình làm việc.</li>
+                                <li role="listitem">Triển khai các tính năng chỉnh sửa video bằng FFmpeg, gọi video trực tiếp qua WebRTC, và livestream bằng Nginx RTMP.</li>
+                                <li role="listitem">Tích hợp các API AI để chấm điểm nhân viên và chấm công bằng nhận diện khuôn mặt.</li>
                             </ul>
                         </div>
-                    </div>
+                    </article>
 
-                    <div class="project-card">
+                    <article class="project-card" role="listitem">
                         <h3 class="project-title">Phát triển E-commerce - minhtuauthentic.com</h3>
                         <p class="project-role">Fullstack Developer | NestJS, Next.js, PostgreSQL</p>
                         <div class="project-description">
-                            <ul>
-                                <li>Phát triển nền tảng e-commerce bằng NestJS (backend) và Next.js (frontend).</li>
-                                <li>Áp dụng Clean Architecture để đảm bảo khả năng bảo trì, mở rộng và kiểm thử.</li>
-                                <li>Tích hợp WebSocket (Socket.IO) để cung cấp thông báo thời gian thực.</li>
-                                <li>Cấu hình và quản lý email server cho các giao dịch như xác nhận đơn hàng.</li>
+                            <ul role="list" aria-label="Các tính năng chính của dự án E-commerce Minh Tu Authentic">
+                                <li role="listitem">Phát triển nền tảng e-commerce bằng NestJS (backend) và Next.js (frontend).</li>
+                                <li role="listitem">Áp dụng Clean Architecture để đảm bảo khả năng bảo trì, mở rộng và kiểm thử.</li>
+                                <li role="listitem">Tích hợp WebSocket (Socket.IO) để cung cấp thông báo thời gian thực.</li>
+                                <li role="listitem">Cấu hình và quản lý email server cho các giao dịch như xác nhận đơn hàng.</li>
                             </ul>
                         </div>
-                    </div>
+                    </article>
                     
-                    <div class="project-card">
+                    <article class="project-card" role="listitem">
                         <h3 class="project-title">Phát triển E-commerce - osaci.vn</h3>
                         <p class="project-role">Fullstack Developer | Vanilla PHP, MySQL</p>
                         <div class="project-description">
-                            <ul>
-                                <li>Di dời toàn bộ nền tảng từ WordPress sang giải pháp PHP thuần tùy chỉnh để tối ưu hiệu suất.</li>
-                                <li>Kiến trúc và thực thi chiến lược SEO on-page, giúp tăng 216% lượng người dùng organic trong 10 ngày.</li>
-                                <li>Phát triển module tự động tạo sitemap để tối ưu việc lập chỉ mục của công cụ tìm kiếm.</li>
+                            <ul role="list" aria-label="Các tính năng chính của dự án E-commerce Osaci">
+                                <li role="listitem">Di dời toàn bộ nền tảng từ WordPress sang giải pháp PHP thuần tùy chỉnh để tối ưu hiệu suất.</li>
+                                <li role="listitem">Kiến trúc và thực thi chiến lược SEO on-page, giúp tăng 216% lượng người dùng organic trong 10 ngày.</li>
+                                <li role="listitem">Phát triển module tự động tạo sitemap để tối ưu việc lập chỉ mục của công cụ tìm kiếm.</li>
                             </ul>
                         </div>
-                    </div>
+                    </article>
 
-                    <div class="project-card">
+                    <article class="project-card" role="listitem">
                         <h3 class="project-title">Phát triển E-commerce - maikashop.vn</h3>
                         <p class="project-role">Fullstack Developer & Team Lead | Laravel, JavaScript, Redis, MySQL</p>
                         <div class="project-description">
-                            <ul>
-                                <li>Dẫn dắt đội ngũ 6 thành viên, quản lý quy trình làm việc bằng Trello và Slack.</li>
-                                <li>Làm việc trực tiếp với khách hàng từ khâu phân tích yêu cầu đến duyệt triển khai.</li>
-                                <li>Xây dựng dịch vụ caching tùy chỉnh bằng Redis, cải thiện tốc độ tải trang 50%.</li>
-                                <li>Triển khai các cải tiến SEO chuyên sâu (canonical tags, schema.org,...).</li>
+                            <ul role="list" aria-label="Các tính năng chính của dự án E-commerce Maika Shop">
+                                <li role="listitem">Dẫn dắt đội ngũ 6 thành viên, quản lý quy trình làm việc bằng Trello và Slack.</li>
+                                <li role="listitem">Làm việc trực tiếp với khách hàng từ khâu phân tích yêu cầu đến duyệt triển khai.</li>
+                                <li role="listitem">Xây dựng dịch vụ caching tùy chỉnh bằng Redis, cải thiện tốc độ tải trang 50%.</li>
+                                <li role="listitem">Triển khai các cải tiến SEO chuyên sâu (canonical tags, schema.org,...).</li>
                             </ul>
                         </div>
-                    </div>
+                    </article>
                     
-                    <div class="project-card">
+                    <article class="project-card" role="listitem">
                         <h3 class="project-title">Nền tảng Tích điểm & Đổi quà - Dự án nội bộ</h3>
                         <p class="project-role">Fullstack Developer | Node.js, React.js, MongoDB</p>
                         <div class="project-description">
-                            <ul>
-                                <li>Phát triển hệ thống cốt lõi cho phép người dùng hoàn thành nhiệm vụ để đổi quà.</li>
-                                <li>Triển khai tính năng đăng nhập mạng xã hội (Google, Facebook) bằng OAuth 2.0.</li>
-                                <li>Thiết kế và xây dựng hệ thống Phân quyền dựa trên vai trò (RBAC).</li>
+                            <ul role="list" aria-label="Các tính năng chính của dự án Tích điểm Đổi quà">
+                                <li role="listitem">Phát triển hệ thống cốt lõi cho phép người dùng hoàn thành nhiệm vụ để đổi quà.</li>
+                                <li role="listitem">Triển khai tính năng đăng nhập mạng xã hội (Google, Facebook) bằng OAuth 2.0.</li>
+                                <li role="listitem">Thiết kế và xây dựng hệ thống Phân quyền dựa trên vai trò (RBAC).</li>
                             </ul>
                         </div>
-                    </div>
+                    </article>
                     
                 </div>
             </div>
         </section>
 
         <!-- Trang Liên Hệ -->
-        <section id="contact-page" class="page">
+        <section id="contact-page" class="page" role="region" aria-labelledby="contact-heading">
             <div class="container">
-                <h2 class="page-title">Liên hệ</h2>
+                <h2 id="contact-heading" class="page-title">Liên hệ</h2>
                 <p class="contact-text">Tôi luôn tìm kiếm những cơ hội mới và sẵn sàng lắng nghe. Nếu bạn có một dự án thú vị, một câu hỏi, hoặc chỉ đơn giản là muốn kết nối, đừng ngần ngại liên hệ với tôi.</p>
-                <div class="social-links">
-                    <a href="mailto:tranvohoanghuydev@gmail.com" target="_blank" aria-label="Email">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
+                <nav class="social-links" role="navigation" aria-label="Liên kết mạng xã hội">
+                    <a href="mailto:tranvohoanghuydev@gmail.com" target="_blank" aria-label="Gửi email cho Trần Võ Hoàng Huy" rel="noopener">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
                     </a>
-                    <a href="https://github.com/hoanghuydev" target="_blank" aria-label="GitHub">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.11.82-.26.82-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.222.694.825.577C20.565 21.795 24 17.3 24 12 24 5.373 18.627 0 12 0z"/></svg>
+                    <a href="https://github.com/hoanghuydev" target="_blank" aria-label="Xem profile GitHub của Trần Võ Hoàng Huy" rel="noopener">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.11.82-.26.82-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.222.694.825.577C20.565 21.795 24 17.3 24 12 24 5.373 18.627 0 12 0z"/></svg>
                     </a>
-                    <a href="https://linkedin.com/in/hoanghuydev" target="_blank" aria-label="LinkedIn">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22.23 0H1.77C.79 0 0 .79 0 1.77v20.46C0 23.21.79 24 1.77 24h20.46c.98 0 1.77-.79 1.77-1.77V1.77C24 .79 23.21 0 22.23 0zM7.06 20.45H3.53V9h3.53v11.45zM5.29 7.43c-1.18 0-2.14-.96-2.14-2.14s.96-2.14 2.14-2.14 2.14.96 2.14 2.14-.96 2.14-2.14 2.14zm13.64 13.02h-3.52V14.6c0-1.39-.03-3.18-1.94-3.18-1.94 0-2.24 1.51-2.24 3.08v5.95H7.71V9h3.38v1.54h.05c.47-.88 1.62-1.81 3.33-1.81 3.56 0 4.22 2.34 4.22 5.39v6.33z"/></svg>
+                    <a href="https://linkedin.com/in/hoanghuydev" target="_blank" aria-label="Kết nối LinkedIn với Trần Võ Hoàng Huy" rel="noopener">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M22.23 0H1.77C.79 0 0 .79 0 1.77v20.46C0 23.21.79 24 1.77 24h20.46c.98 0 1.77-.79 1.77-1.77V1.77C24 .79 23.21 0 22.23 0zM7.06 20.45H3.53V9h3.53v11.45zM5.29 7.43c-1.18 0-2.14-.96-2.14-2.14s.96-2.14 2.14-2.14 2.14.96 2.14 2.14-.96 2.14-2.14 2.14zm13.64 13.02h-3.52V14.6c0-1.39-.03-3.18-1.94-3.18-1.94 0-2.24 1.51-2.24 3.08v5.95H7.71V9h3.38v1.54h.05c.47-.88 1.62-1.81 3.33-1.81 3.56 0 4.22 2.34 4.22 5.39v6.33z"/></svg>
                     </a>
-                    <a href="https://facebook.com/hoanghuydev" target="_blank" aria-label="Facebook">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22.675 0H1.325C.593 0 0 .593 0 1.325v21.35C0 23.407.593 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.732 0 1.325-.593 1.325-1.325V1.325C24 .593 23.407 0 22.675 0z"/></svg>
+                    <a href="https://facebook.com/hoanghuydev" target="_blank" aria-label="Theo dõi Facebook của Trần Võ Hoàng Huy" rel="noopener">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img" aria-hidden="true"><path d="M22.675 0H1.325C.593 0 0 .593 0 1.325v21.35C0 23.407.593 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.732 0 1.325-.593 1.325-1.325V1.325C24 .593 23.407 0 22.675 0z"/></svg>
                     </a>
-                </div>
+                </nav>
             </div>
         </section>
     </main>
