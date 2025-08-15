@@ -21,6 +21,20 @@ function switchPage(pageId) {
         oldPage.style.animation = 'fadeOut 0.5s forwards';
     }
 
+    // Kích hoạt hiệu ứng motion blur
+    gsap.to(bloomPass, {
+        strength: 1.5,
+        duration: 1,
+        ease: 'power2.in',
+        onComplete: () => {
+            gsap.to(bloomPass, {
+                strength: 0,
+                duration: 1,
+                ease: 'power2.out'
+            });
+        }
+    });
+
     // 2. Bắt đầu animation cho camera bằng GSAP
     gsap.to(camera.position, {
         x: targetData.cameraPosition.x,

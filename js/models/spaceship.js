@@ -31,14 +31,27 @@ function loadSpaceship() {
 function updateSpaceshipPosition() {
     if (!spaceship) return;
 
-    // Tính toán vị trí phía trước camera
-    const distance = 1.5; 
+    // Tính toán vị trí mới cho phi thuyền (hơi lệch sang một bên và ở dưới camera)
     const cameraDirection = new THREE.Vector3();
     camera.getWorldDirection(cameraDirection);
 
-    const position = new THREE.Vector3().copy(camera.position).add(cameraDirection.multiplyScalar(distance));
+    const right = new THREE.Vector3();
+    right.crossVectors(camera.up, cameraDirection).normalize();
+
+    const up = new THREE.Vector3();
+    up.crossVectors(cameraDirection, right).normalize();
+
+    const offset = new THREE.Vector3()
+        .add(right.multiplyScalar(1)) // Lệch sang phải
+        .add(up.multiplyScalar(-0.6)) // Đi xuống dưới
+        .add(cameraDirection.multiplyScalar(2)); // Ở phía trước
+
+    const position = new THREE.Vector3().copy(camera.position).add(offset);
     spaceship.position.copy(position);
 
-    // Hướng phi thuyền về phía trước
-    spaceship.lookAt(position.add(cameraDirection.multiplyScalar(1))); 
+    // Hướng phi thuyền về phía trước, hơi hướng lên trên
+    const lookAtPosition = new THREE.Vector3().copy(position)
+        .add(cameraDirection.multiplyScalar(1))
+        .add(up.multiplyScalar(0.1));
+    spaceship.lookAt(lookAtPosition);
 }

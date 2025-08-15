@@ -45,6 +45,7 @@ let currentPageId = 'home-page';
 let isAnimating = false;
 let mouseX = 0, mouseY = 0;
 let clock = new THREE.Clock();
+let composer, bloomPass;
 
 // --- Utility functions ---
 
@@ -63,6 +64,7 @@ function onWindowResize() {
     camera.aspect = window.innerWidth / window.innerHeight;
     camera.updateProjectionMatrix();
     renderer.setSize(window.innerWidth, window.innerHeight);
+    composer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 }
 
@@ -83,6 +85,17 @@ function initSceneBasics() {
     });
     renderer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    const renderScene = new THREE.RenderPass(scene, camera);
+
+    bloomPass = new THREE.UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85);
+    bloomPass.threshold = 0;
+    bloomPass.strength = 0; // Bắt đầu với không có hiệu ứng bloom
+    bloomPass.radius = 0;
+
+    composer = new THREE.EffectComposer(renderer);
+    composer.addPass(renderScene);
+    composer.addPass(bloomPass);
 }
 
 /**
