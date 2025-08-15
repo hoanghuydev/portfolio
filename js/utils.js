@@ -189,7 +189,11 @@ function preloadAllAssets() {
     // Load spaceship (sẽ follow camera như logic gốc)
     gltfLoader.load('model/spaceship.glb', (gltf) => {
         spaceship = gltf.scene;
-        spaceship.scale.set(2.3, 2.3, 2.3); // Scale gốc như ban đầu
+        
+        // Điều chỉnh scale dựa trên device type
+        const isMobile = window.innerWidth <= 768 || /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        const scale = isMobile ? 1.8 : 2.3; // Nhỏ hơn trên mobile
+        spaceship.scale.set(scale, scale, scale);
         
         // Đặt vị trí ban đầu của phi thuyền ở trước camera
         updateSpaceshipPosition();
@@ -218,6 +222,11 @@ function onWindowResize() {
     renderer.setSize(window.innerWidth, window.innerHeight);
     composer.setSize(window.innerWidth, window.innerHeight);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    
+    // Cập nhật scale spaceship cho mobile/desktop khi thay đổi kích thước màn hình
+    if (typeof updateSpaceshipScale === 'function') {
+        updateSpaceshipScale();
+    }
 }
 
 /**

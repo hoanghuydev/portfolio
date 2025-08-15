@@ -16,7 +16,11 @@ function loadSpaceship() {
             'model/spaceship.glb',
             (gltf) => {
                 spaceship = gltf.scene;
-                spaceship.scale.set(2.3, 2.3, 2.3);
+                
+                // Điều chỉnh scale dựa trên device type
+                const isMobile = isMobileDevice();
+                const scale = isMobile ? 1.8 : 2.3; // Nhỏ hơn trên mobile
+                spaceship.scale.set(scale, scale, scale);
                 
                 // Đặt vị trí ban đầu của phi thuyền ở trước camera
                 updateSpaceshipPosition();
@@ -29,6 +33,24 @@ function loadSpaceship() {
             }
         );
     }
+}
+
+/**
+ * Kiểm tra xem có phải mobile device không
+ */
+function isMobileDevice() {
+    return window.innerWidth <= 768 || /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+}
+
+/**
+ * Cập nhật scale spaceship khi thay đổi kích thước màn hình
+ */
+function updateSpaceshipScale() {
+    if (!spaceship) return;
+    
+    const isMobile = isMobileDevice();
+    const scale = isMobile ? 1.8 : 2.3;
+    spaceship.scale.set(scale, scale, scale);
 }
 
 /**
@@ -47,10 +69,16 @@ function updateSpaceshipPosition() {
     const up = new THREE.Vector3();
     up.crossVectors(cameraDirection, right).normalize();
 
+    // Điều chỉnh offset dựa trên device type
+    const isMobile = isMobileDevice();
+    const rightOffset = isMobile ? 0.3 : 1; // Giảm offset sang phải trên mobile
+    const downOffset = isMobile ? -0.3 : -0.6; // Điều chỉnh vị trí dọc
+    const forwardOffset = isMobile ? 1.5 : 2; // Điều chỉnh khoảng cách
+
     const offset = new THREE.Vector3()
-        .add(right.multiplyScalar(1)) // Lệch sang phải
-        .add(up.multiplyScalar(-0.6)) // Đi xuống dưới
-        .add(cameraDirection.multiplyScalar(2)); // Ở phía trước
+        .add(right.multiplyScalar(rightOffset)) // Lệch sang phải (ít hơn trên mobile)
+        .add(up.multiplyScalar(downOffset)) // Đi xuống dưới
+        .add(cameraDirection.multiplyScalar(forwardOffset)); // Ở phía trước
 
     const position = new THREE.Vector3().copy(camera.position).add(offset);
     spaceship.position.copy(position);
