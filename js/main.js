@@ -1,9 +1,14 @@
 // main.js - Main controller file that orchestrates the entire 3D portfolio
 
+let isInitialized = false;
+
 /**
  * Khởi tạo toàn bộ hệ thống 3D
  */
 function init3D() {
+    if (isInitialized) return;
+    isInitialized = true;
+
     // 1. Khởi tạo scene và camera cơ bản
     initSceneBasics();
     
@@ -35,6 +40,7 @@ function loadAllModels() {
     loadMarsModel();
     loadSaturnModel();
     loadUranusModel();
+    loadSpaceship();
 }
 
 /**
@@ -49,13 +55,12 @@ function setupEventListeners() {
 /**
  * Khởi tạo ứng dụng khi DOM đã sẵn sàng
  */
-document.addEventListener('DOMContentLoaded', () => {
-    init3D();
-});
-
-// Khởi tạo ngay lập tức nếu DOM đã sẵn sàng
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init3D);
-} else {
-    init3D();
+function initializeApp() {
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init3D);
+    } else {
+        init3D();
+    }
 }
+
+initializeApp();

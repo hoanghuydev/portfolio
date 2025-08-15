@@ -28,6 +28,10 @@ function switchPage(pageId) {
         z: targetData.cameraPosition.z,
         duration: 2.8,
         ease: 'power3.inOut',
+        onUpdate: () => {
+            // Cập nhật vị trí phi thuyền trong suốt quá trình di chuyển
+            updateSpaceshipPosition();
+        }
     });
 
     gsap.to(controlsTarget, {
@@ -40,6 +44,38 @@ function switchPage(pageId) {
             isAnimating = false;
         }
     });
+
+    // Thêm animation cho phi thuyền bay về phía hành tinh
+    if (spaceship) {
+        gsap.to(spaceship.position, {
+            x: targetData.cameraPosition.x,
+            y: targetData.cameraPosition.y,
+            z: targetData.cameraPosition.z,
+            duration: 2.5, // Ngắn hơn camera một chút để tạo cảm giác phi thuyền dẫn đầu
+            ease: 'power3.inOut',
+            onComplete: () => {
+                // Sau khi đến nơi, cập nhật lại vị trí phi thuyền trước camera
+                updateSpaceshipPosition();
+            }
+        });
+
+        // Hướng phi thuyền về phía hành tinh
+        const targetPosition = new THREE.Vector3(
+            targetData.lookAt.x,
+            targetData.lookAt.y,
+            targetData.lookAt.z
+        );
+        gsap.to(spaceship.rotation, {
+            ...new THREE.Euler().setFromQuaternion(
+                new THREE.Quaternion().setFromUnitVectors(
+                    new THREE.Vector3(0, 0, 1),
+                    targetPosition.clone().sub(spaceship.position).normalize()
+                )
+            ),
+            duration: 1,
+            ease: 'power3.inOut'
+        });
+    }
 
     // 3. Chuyển class 'active' giữa chừng animation
     gsap.delayedCall(1.2, () => {

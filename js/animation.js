@@ -21,6 +21,9 @@ function animate() {
     // Cập nhật animation cho từng hành tinh
     updateSatelliteAnimation(elapsedTime);
 
+    // Cập nhật vị trí phi thuyền
+    updateSpaceshipPosition();
+
     // Hiệu ứng parallax khi không có animation chuyển trang
     if (!isAnimating) {
         const targetData = pageData[currentPageId];
