@@ -4,332 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trần Võ Hoàng Huy - Fullstack Developer Portfolio</title>
-    <!-- Thư viện Three.js và GSAP -->
+    <link rel="stylesheet" href="/css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Roboto:wght@300;400;700&display=swap');
-
-        :root {
-            --primary-color: #0A0A1A;
-            --secondary-color: #11112A;
-            --text-light: #E0E0FF;
-            --text-dark: #A0A0C0;
-            --accent-color: #00FFFF;
-            --accent-hover: rgba(0, 255, 255, 0.1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            background-color: var(--primary-color);
-            color: var(--text-light);
-            font-family: 'Roboto', sans-serif;
-            line-height: 1.7;
-            overflow: hidden; /* Chặn scroll của trang */
-        }
-
-        #bg-canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-        }
-
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 30px;
-            position: relative;
-            z-index: 2;
-        }
-
-        header {
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 100;
-            background-color: rgba(10, 10, 26, 0.75);
-            backdrop-filter: blur(10px);
-            transition: top 0.3s;
-        }
-
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 0;
-            border-bottom: 1px solid var(--secondary-color);
-        }
-        
-        nav .logo {
-            font-family: 'Orbitron', sans-serif;
-            font-size: 1.8rem;
-            font-weight: 700;
-            color: var(--accent-color);
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        nav ul {
-            display: flex;
-            list-style: none;
-        }
-
-        nav ul li {
-            margin-left: 25px;
-        }
-
-        nav ul li a {
-            color: var(--text-light);
-            text-decoration: none;
-            padding: 10px;
-            font-family: 'Orbitron', sans-serif;
-            transition: color 0.3s, text-shadow 0.3s;
-            cursor: pointer;
-        }
-
-        nav ul li a:hover, nav ul li a.active {
-            color: var(--accent-color);
-            text-shadow: 0 0 10px var(--accent-color);
-        }
-
-        .page {
-            min-height: 100vh;
-            display: flex; /* Sử dụng flex để căn giữa */
-            flex-direction: column;
-            justify-content: center;
-            align-items: flex-start;
-            padding: 120px 0 60px 0;
-            position: absolute; /* Đặt chồng các trang lên nhau */
-            top: 0;
-            left: 0;
-            width: 100%;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.8s ease-in-out;
-        }
-
-        .page.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        h1, h2, h3 {
-            font-family: 'Orbitron', sans-serif;
-            color: var(--text-light);
-            margin-bottom: 20px;
-            text-shadow: 0 0 5px rgba(0, 255, 255, 0.3);
-        }
-
-        .page-title {
-           font-size: 2.5rem;
-           margin-bottom: 40px;
-           position: relative;
-           padding-bottom: 10px;
-        }
-
-        .page-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 60px;
-            height: 3px;
-            background-color: var(--accent-color);
-        }
-
-        /* Home Page */
-        #home-page {
-            text-align: left;
-        }
-
-        #home-page h1 {
-            font-size: clamp(40px, 8vw, 80px);
-            margin: 0;
-            line-height: 1.1;
-        }
-
-        #home-page .subtitle {
-            font-size: clamp(20px, 5vw, 40px);
-            color: var(--text-dark);
-            margin-top: 10px;
-        }
-        
-        #home-page p {
-            color: var(--text-dark);
-            max-width: 600px;
-            margin-top: 25px;
-            font-size: 1.1rem;
-        }
-
-        .cta-button {
-            display: inline-block;
-            margin-top: 50px;
-            padding: 1rem 2rem;
-            border: 1px solid var(--accent-color);
-            border-radius: 4px;
-            color: var(--accent-color);
-            background-color: transparent;
-            text-decoration: none;
-            font-family: 'Orbitron', sans-serif;
-            transition: background-color 0.3s, box-shadow 0.3s;
-            cursor: pointer;
-        }
-
-        .cta-button:hover {
-            background-color: var(--accent-hover);
-            box-shadow: 0 0 15px var(--accent-hover);
-        }
-        
-        /* About Page */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 50px;
-            align-items: flex-start;
-        }
-        
-        .about-content p {
-            color: var(--text-dark);
-            font-size: 1.1rem;
-        }
-        
-        .skills-category {
-            margin-top: 30px;
-        }
-
-        .skills-category h3 {
-            font-size: 1.2rem;
-            color: var(--accent-color);
-            margin-bottom: 15px;
-        }
-
-        .skills-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            list-style: none;
-        }
-        
-        .skills-grid li {
-            background-color: var(--secondary-color);
-            padding: 5px 12px;
-            border-radius: 4px;
-            font-family: 'Roboto', sans-serif;
-            font-size: 0.9rem;
-            color: var(--text-dark);
-            border: 1px solid #2a2a4a;
-        }
-
-        /* Projects Page */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 30px;
-            width: 100%;
-        }
-
-        .project-card {
-            background-color: var(--secondary-color);
-            padding: 25px;
-            border-radius: 4px;
-            border-left: 3px solid var(--accent-color);
-            transition: transform 0.3s, box-shadow 0.3s;
-            width: 100%;
-        }
-        
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px -15px rgba(2,12,27,0.7);
-        }
-
-        .project-title {
-            font-size: 1.5rem;
-            margin-bottom: 5px;
-        }
-        
-        .project-role {
-            font-family: 'Roboto', sans-serif;
-            color: var(--accent-color);
-            margin-bottom: 15px;
-            font-size: 0.9rem;
-            font-style: italic;
-        }
-        
-        .project-description ul {
-            list-style: none;
-        }
-        
-        .project-description li {
-            color: var(--text-dark);
-            margin-bottom: 10px;
-            padding-left: 25px;
-            position: relative;
-        }
-        
-        .project-description li::before {
-            content: '▹';
-            position: absolute;
-            left: 0;
-            color: var(--accent-color);
-            font-size: 1.2rem;
-            line-height: 1;
-        }
-
-        /* Contact Page */
-        #contact-page .container {
-            text-align: center;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-        
-        #contact-page p {
-            max-width: 600px;
-            margin: 0 auto 50px auto;
-            color: var(--text-dark);
-            font-size: 1.2rem;
-        }
-        
-        .social-links {
-            margin-top: 30px;
-        }
-        
-        .social-links a {
-            color: var(--text-dark);
-            text-decoration: none;
-            margin: 0 15px;
-            font-size: 1.1rem;
-            transition: color 0.3s;
-        }
-        
-        .social-links a:hover {
-            color: var(--accent-color);
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            nav ul {
-                display: none; /* Simple hide for mobile, can be replaced with hamburger menu */
-            }
-            .about-content {
-                grid-template-columns: 1fr;
-            }
-        }
-    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
+    
 </head>
 <body>
     <canvas id="bg-canvas"></canvas>
@@ -337,7 +16,9 @@
     <header>
         <div class="container">
             <nav>
-                <a class="logo" data-page="home-page">THH</a>
+                <a class="logo" data-page="home-page">
+                    <img src="images/avatar.jpg" alt="Avatar" class="logo-img">
+                </a>
                 <ul>
                     <li><a data-page="home-page" class="nav-link active">Trang chủ</a></li>
                     <li><a data-page="about-page" class="nav-link">Giới thiệu</a></li>
@@ -373,19 +54,40 @@
                         <div class="skills-category">
                             <h3>Frontend</h3>
                             <ul class="skills-grid">
-                                <li>React.js</li><li>Next.js</li><li>TypeScript</li><li>JavaScript</li><li>Tailwind CSS</li><li>Three.js</li><li>jQuery</li><li>Figma</li>
+                                <li>React.js</li>
+                                <li>Next.js</li>
+                                <li>TypeScript</li>
+                                <li>JavaScript</li>
+                                <li>Tailwind CSS</li>
+                                <li>Three.js</li>
+                                <li>jQuery</li>
+                                <li>Figma</li>
                             </ul>
                         </div>
                         <div class="skills-category">
                             <h3>Backend</h3>
                             <ul class="skills-grid">
-                                <li>Node.js</li><li>NestJS</li><li>Laravel (PHP)</li><li>Spring Boot (Java)</li><li>MySQL</li><li>PostgreSQL</li><li>MongoDB</li><li>Redis</li><li>WebSocket</li><li>Kafka</li>
+                                <li>Node.js</li>
+                                <li>NestJS</li>
+                                <li>Laravel (PHP)</li>
+                                <li>Spring Boot (Java)</li>
+                                <li>MySQL</li>
+                                <li>PostgreSQL</li>
+                                <li>MongoDB</li>
+                                <li>Redis</li>
+                                <li>WebSocket</li>
+                                <li>Kafka</li>
                             </ul>
                         </div>
                         <div class="skills-category">
                             <h3>DevOps & Infrastructure</h3>
                             <ul class="skills-grid">
-                                <li>Docker</li><li>CI/CD (Github Actions)</li><li>Nginx</li><li>AWS</li><li>Firebase</li><li>Git</li>
+                                <li>Docker</li>
+                                <li>CI/CD (Github Actions)</li>
+                                <li>Nginx</li>
+                                <li>AWS</li>
+                                <li>Firebase</li>
+                                <li>Git</li>
                             </ul>
                         </div>
                     </div>
@@ -398,8 +100,9 @@
             <div class="container">
                 <h2 class="page-title">Dự án nổi bật</h2>
                 <div class="projects-grid">
+                    
                     <div class="project-card">
-                        <h3 class="project-title">Hệ thống CRM</h3>
+                        <h3 class="project-title">Hệ thống CRM - manager.cosan.vn</h3>
                         <p class="project-role">Fullstack Developer | PHP, jQuery, MySQL, React.js</p>
                         <div class="project-description">
                             <ul>
@@ -410,6 +113,7 @@
                             </ul>
                         </div>
                     </div>
+
                     <div class="project-card">
                         <h3 class="project-title">Phát triển E-commerce - minhtuauthentic.com</h3>
                         <p class="project-role">Fullstack Developer | NestJS, Next.js, PostgreSQL</p>
@@ -422,6 +126,44 @@
                             </ul>
                         </div>
                     </div>
+                    
+                    <div class="project-card">
+                        <h3 class="project-title">Phát triển E-commerce - osaci.vn</h3>
+                        <p class="project-role">Fullstack Developer | Vanilla PHP, MySQL</p>
+                        <div class="project-description">
+                            <ul>
+                                <li>Di dời toàn bộ nền tảng từ WordPress sang giải pháp PHP thuần tùy chỉnh để tối ưu hiệu suất.</li>
+                                <li>Kiến trúc và thực thi chiến lược SEO on-page, giúp tăng 216% lượng người dùng organic trong 10 ngày.</li>
+                                <li>Phát triển module tự động tạo sitemap để tối ưu việc lập chỉ mục của công cụ tìm kiếm.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="project-card">
+                        <h3 class="project-title">Phát triển E-commerce - maikashop.vn</h3>
+                        <p class="project-role">Fullstack Developer & Team Lead | Laravel, JavaScript, Redis, MySQL</p>
+                        <div class="project-description">
+                            <ul>
+                                <li>Dẫn dắt đội ngũ 6 thành viên, quản lý quy trình làm việc bằng Trello và Slack.</li>
+                                <li>Làm việc trực tiếp với khách hàng từ khâu phân tích yêu cầu đến duyệt triển khai.</li>
+                                <li>Xây dựng dịch vụ caching tùy chỉnh bằng Redis, cải thiện tốc độ tải trang 50%.</li>
+                                <li>Triển khai các cải tiến SEO chuyên sâu (canonical tags, schema.org,...).</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="project-card">
+                        <h3 class="project-title">Nền tảng Tích điểm & Đổi quà - Dự án nội bộ</h3>
+                        <p class="project-role">Fullstack Developer | Node.js, React.js, MongoDB</p>
+                        <div class="project-description">
+                            <ul>
+                                <li>Phát triển hệ thống cốt lõi cho phép người dùng hoàn thành nhiệm vụ để đổi quà.</li>
+                                <li>Triển khai tính năng đăng nhập mạng xã hội (Google, Facebook) bằng OAuth 2.0.</li>
+                                <li>Thiết kế và xây dựng hệ thống Phân quyền dựa trên vai trò (RBAC).</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
                 </div>
             </div>
         </section>
@@ -430,261 +172,34 @@
         <section id="contact-page" class="page">
             <div class="container">
                 <h2 class="page-title">Liên hệ</h2>
-                <p>Tôi luôn tìm kiếm những cơ hội mới và sẵn sàng lắng nghe. Nếu bạn có một dự án thú vị, một câu hỏi, hoặc chỉ đơn giản là muốn kết nối, đừng ngần ngại liên hệ với tôi.</p>
-                <a href="mailto:tranvohoanghuydev@gmail.com" class="cta-button">Gửi Email</a>
+                <p class="contact-text">Tôi luôn tìm kiếm những cơ hội mới và sẵn sàng lắng nghe. Nếu bạn có một dự án thú vị, một câu hỏi, hoặc chỉ đơn giản là muốn kết nối, đừng ngần ngại liên hệ với tôi.</p>
                 <div class="social-links">
-                    <a href="https://github.com/hoanghuydev" target="_blank">GitHub</a>
+                    <a href="mailto:tranvohoanghuydev@gmail.com" target="_blank" aria-label="Email">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22 6c0-1.1-.9-2-2-2H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6zm-2 0l-8 5-8-5h16zm0 12H4V8l8 5 8-5v10z"/></svg>
+                    </a>
+                    <a href="https://github.com/hoanghuydev" target="_blank" aria-label="GitHub">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.11.82-.26.82-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.108-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.91 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.222.694.825.577C20.565 21.795 24 17.3 24 12 24 5.373 18.627 0 12 0z"/></svg>
+                    </a>
+                    <a href="https://linkedin.com/in/hoanghuydev" target="_blank" aria-label="LinkedIn">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22.23 0H1.77C.79 0 0 .79 0 1.77v20.46C0 23.21.79 24 1.77 24h20.46c.98 0 1.77-.79 1.77-1.77V1.77C24 .79 23.21 0 22.23 0zM7.06 20.45H3.53V9h3.53v11.45zM5.29 7.43c-1.18 0-2.14-.96-2.14-2.14s.96-2.14 2.14-2.14 2.14.96 2.14 2.14-.96 2.14-2.14 2.14zm13.64 13.02h-3.52V14.6c0-1.39-.03-3.18-1.94-3.18-1.94 0-2.24 1.51-2.24 3.08v5.95H7.71V9h3.38v1.54h.05c.47-.88 1.62-1.81 3.33-1.81 3.56 0 4.22 2.34 4.22 5.39v6.33z"/></svg>
+                    </a>
+                    <a href="https://facebook.com/hoanghuydev" target="_blank" aria-label="Facebook">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M22.675 0H1.325C.593 0 0 .593 0 1.325v21.35C0 23.407.593 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.732 0 1.325-.593 1.325-1.325V1.325C24 .593 23.407 0 22.675 0z"/></svg>
+                    </a>
                 </div>
             </div>
         </section>
     </main>
     
-    <script>
-        // --- Cài đặt cảnh 3D ---
-        let scene, camera, renderer, stars, mouseX = 0, mouseY = 0;
-        const celestialBodies = {};
-        const cameraTargets = {};
-
-        function init3D() {
-            scene = new THREE.Scene();
-            camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            
-            renderer = new THREE.WebGLRenderer({ 
-                canvas: document.getElementById('bg-canvas'), 
-                alpha: true 
-            });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-
-            // --- Ánh sáng ---
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
-            scene.add(ambientLight);
-
-            // --- Tạo các thiên thể ---
-            celestialBodies['home-page'] = createUranus();
-            celestialBodies['about-page'] = createSaturn();
-            celestialBodies['projects-page'] = createEarth();
-            celestialBodies['contact-page'] = createSun();
-            
-            // Thêm các thiên thể vào cảnh
-            for (const key in celestialBodies) {
-                scene.add(celestialBodies[key]);
-            }
-
-            // --- Định vị trí cho Camera ---
-            // Trang chủ: Sao Thiên Vương
-            cameraTargets['home-page'] = {
-                position: new THREE.Vector3(0, 3, 10)
-            };
-            // Giới thiệu: Sao Thổ
-            cameraTargets['about-page'] = {
-                position: new THREE.Vector3(-45, 5, 12)
-            };
-            // Dự án: Trái Đất
-            cameraTargets['projects-page'] = {
-                position: new THREE.Vector3(25, 2, 8)
-            };
-            // Liên hệ: Mặt Trời
-            cameraTargets['contact-page'] = {
-                position: new THREE.Vector3(0, 5, 15)
-            };
-
-            // Đặt vị trí camera ban đầu
-            camera.position.copy(cameraTargets['home-page'].position);
-            camera.lookAt(celestialBodies['home-page'].position);
-
-            // --- Tạo nền sao ---
-            createStarfield();
-
-            window.addEventListener('mousemove', onMouseMove);
-            window.addEventListener('resize', onWindowResize);
-
-            animate();
-        }
-
-        function createStarfield() {
-            const starGeo = new THREE.BufferGeometry();
-            const starCount = 20000; // Tăng số lượng sao
-            const posArray = new Float32Array(starCount * 3);
-            for (let i = 0; i < starCount * 3; i++) {
-                posArray[i] = (Math.random() - 0.5) * 500; // Tăng phạm vi
-            }
-            starGeo.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
-            const starMaterial = new THREE.PointsMaterial({
-                size: 0.1,
-                color: 0xaaaaaa,
-                transparent: true,
-                opacity: 0.8
-            });
-            stars = new THREE.Points(starGeo, starMaterial);
-            scene.add(stars);
-        }
-        
-        // --- Hàm tạo các hành tinh ---
-        function createUranus() { // Trang chủ
-            const group = new THREE.Group();
-            const planetGeo = new THREE.SphereGeometry(2.2, 32, 32); 
-            const planetMat = new THREE.MeshStandardMaterial({ color: 0xafdeee, roughness: 0.6 });
-            const planet = new THREE.Mesh(planetGeo, planetMat);
-            group.add(planet);
-
-            const ringGeo = new THREE.TorusGeometry(3.2, 0.07, 2, 100);
-            const ringMat = new THREE.MeshBasicMaterial({ color: 0xadd8e6, side: THREE.DoubleSide, transparent: true, opacity: 0.8 });
-            const ring = new THREE.Mesh(ringGeo, ringMat);
-            ring.rotation.x = Math.PI / 2;
-            group.add(ring);
-            
-            group.rotation.z = 0.2;
-            group.position.set(0, 0, 0); // Vị trí trung tâm cho trang chủ
-            return group;
-        }
-
-        function createSaturn() { // Giới thiệu
-            const group = new THREE.Group();
-            const planetGeo = new THREE.SphereGeometry(3, 32, 32);
-            const planetMat = new THREE.MeshStandardMaterial({ color: 0xFCDA9A, roughness: 0.7 });
-            const planet = new THREE.Mesh(planetGeo, planetMat);
-            group.add(planet);
-
-            // Tạo nhiều vành đai cho Sao Thổ
-            const ringColors = [0xADA591, 0x948B77, 0x7C7363];
-            for(let i = 0; i < 3; i++) {
-                const ringGeo = new THREE.TorusGeometry(4.5 + i * 0.8, 0.3, 2, 100);
-                const ringMat = new THREE.MeshBasicMaterial({ color: ringColors[i], side: THREE.DoubleSide });
-                const ring = new THREE.Mesh(ringGeo, ringMat);
-                ring.rotation.x = Math.PI / 1.8;
-                group.add(ring);
-            }
-            
-            group.position.set(-45, 0, 0);
-            return group;
-        }
-
-        function createEarth() { // Dự án
-            const group = new THREE.Group();
-            const planetGeo = new THREE.SphereGeometry(2.5, 32, 32);
-            const planetMat = new THREE.MeshStandardMaterial({ color: 0x4D96FF, roughness: 0.5 });
-            const planet = new THREE.Mesh(planetGeo, planetMat);
-            group.add(planet);
-
-            // Thêm "mây" cho Trái Đất
-            const cloudGeo = new THREE.SphereGeometry(2.6, 32, 32);
-            const cloudMat = new THREE.MeshStandardMaterial({
-                color: 0xffffff,
-                transparent: true,
-                opacity: 0.3
-            });
-            const clouds = new THREE.Mesh(cloudGeo, cloudMat);
-            group.add(clouds);
-
-            group.position.set(25, 0, 0);
-            return group;
-        }
-
-        function createSun() { // Liên hệ
-            const group = new THREE.Group();
-            const sunGeo = new THREE.SphereGeometry(8, 32, 32);
-            const sunMat = new THREE.MeshBasicMaterial({ color: 0xFFD700, emissive: 0xFFD700, emissiveIntensity: 1 });
-            const sun = new THREE.Mesh(sunGeo, sunMat);
-            group.add(sun);
-
-            // Thêm ánh sáng phát ra từ mặt trời
-            const pointLight = new THREE.PointLight(0xFFD700, 2, 100);
-            group.add(pointLight);
-
-            group.position.set(0, 0, -30);
-            return group;
-        }
-
-        // --- Vòng lặp Animation ---
-        function animate() {
-            requestAnimationFrame(animate);
-
-            // Tự xoay các thiên thể
-            celestialBodies['home-page'].rotation.y += 0.002;
-            celestialBodies['about-page'].rotation.y += 0.001;
-            celestialBodies['projects-page'].rotation.y += 0.003;
-            celestialBodies['contact-page'].rotation.y += 0.0005;
-            
-            // Xoay nền sao
-            stars.rotation.y += 0.0001;
-
-            // Di chuyển camera theo chuột một cách tinh tế
-            camera.position.x += (mouseX * 0.0001 - (camera.position.x - camera.position.x)) * 0.05;
-            camera.position.y += (-mouseY * 0.0001 - (camera.position.y - camera.position.y)) * 0.05;
-            
-            renderer.render(scene, camera);
-        }
-
-        function onMouseMove(event) {
-            mouseX = event.clientX - window.innerWidth / 2;
-            mouseY = event.clientY - window.innerHeight / 2;
-        }
-
-        function onWindowResize() {
-            camera.aspect = window.innerWidth / window.innerHeight;
-            camera.updateProjectionMatrix();
-            renderer.setSize(window.innerWidth, window.innerHeight);
-        }
-        
-        init3D();
-
-        // --- Logic Chuyển Trang với GSAP ---
-        const navLinks = document.querySelectorAll('.nav-link, .logo, .cta-button');
-        const pages = document.querySelectorAll('.page');
-        let isAnimating = false;
-
-        function switchPage(pageId) {
-            if (isAnimating) return; // Chặn click khi đang chuyển cảnh
-            isAnimating = true;
-
-            const currentPage = document.querySelector('.page.active');
-            if (currentPage) {
-                currentPage.classList.remove('active');
-            }
-            
-            const targetPlanet = celestialBodies[pageId];
-            const targetCameraPos = cameraTargets[pageId].position;
-
-            // Dùng GSAP để di chuyển camera
-            gsap.to(camera.position, {
-                x: targetCameraPos.x,
-                y: targetCameraPos.y,
-                z: targetCameraPos.z,
-                duration: 2.5, // Thời gian di chuyển
-                ease: 'power3.inOut',
-                onUpdate: () => {
-                    // Luôn nhìn vào hành tinh mục tiêu trong khi di chuyển
-                    camera.lookAt(targetPlanet.position);
-                },
-                onComplete: () => {
-                    const targetPage = document.getElementById(pageId);
-                    if (targetPage) {
-                        targetPage.classList.add('active');
-                    }
-                    isAnimating = false; // Cho phép click lại
-                }
-            });
-
-            // Cập nhật link active
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-                if (link.dataset.page === pageId) {
-                    link.classList.add('active');
-                }
-            });
-        }
-
-        navLinks.forEach(link => {
-            link.addEventListener('click', (e) => {
-                e.preventDefault();
-                const pageId = e.currentTarget.dataset.page;
-                const currentPage = document.querySelector('.page.active');
-                if (pageId && (!currentPage || currentPage.id !== pageId)) {
-                    switchPage(pageId);
-                }
-            });
-        });
-        
-    </script>
+    <!-- JavaScript Files -->
+    <script src="/js/utils.js"></script>
+    <script src="/js/models/satellite.js"></script>
+    <script src="/js/models/earth.js"></script>
+    <script src="/js/models/mars.js"></script>
+    <script src="/js/models/saturn.js"></script>
+    <script src="/js/models/uranus.js"></script>
+    <script src="/js/animation.js"></script>
+    <script src="/js/navigation.js"></script>
+    <script src="/js/main.js"></script>
 </body>
 </html>
