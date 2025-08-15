@@ -129,18 +129,92 @@ function switchPage(pageId) {
 }
 
 /**
+ * Toggle mobile menu - Hiển thị/ẩn menu trên mobile
+ */
+function toggleMobileMenu() {
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    
+    if (mobileMenuToggle && navMenu) {
+        const isActive = navMenu.classList.contains('active');
+        
+        if (isActive) {
+            // Đóng menu
+            navMenu.classList.remove('active');
+            mobileMenuToggle.classList.remove('active');
+            mobileMenuToggle.setAttribute('aria-expanded', 'false');
+            document.body.style.overflow = 'auto'; // Cho phép scroll lại
+        } else {
+            // Mở menu
+            navMenu.classList.add('active');
+            mobileMenuToggle.classList.add('active');
+            mobileMenuToggle.setAttribute('aria-expanded', 'true');
+            document.body.style.overflow = 'hidden'; // Ngăn scroll khi menu mở
+        }
+    }
+}
+
+/**
+ * Đóng mobile menu
+ */
+function closeMobileMenu() {
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+    
+    if (mobileMenuToggle && navMenu) {
+        navMenu.classList.remove('active');
+        mobileMenuToggle.classList.remove('active');
+        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = 'auto';
+    }
+}
+
+/**
  * Khởi tạo các event listener cho navigation
  */
 function initNavigation() {
     const navLinks = document.querySelectorAll('.nav-link, .logo, .cta-button');
+    const mobileMenuToggle = document.querySelector('.mobile-menu-toggle');
+    const navMenu = document.querySelector('.nav-menu');
 
+    // Event listeners cho navigation links
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             const pageId = e.currentTarget.dataset.page;
             if (pageId) {
                 switchPage(pageId);
+                // Đóng mobile menu sau khi chuyển trang
+                closeMobileMenu();
             }
         });
+    });
+
+    // Event listener cho hamburger menu button
+    if (mobileMenuToggle) {
+        mobileMenuToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            toggleMobileMenu();
+        });
+    }
+
+    // Đóng menu khi click bên ngoài (chỉ trên mobile)
+    document.addEventListener('click', (e) => {
+        if (navMenu && navMenu.classList.contains('active')) {
+            const isClickInsideMenu = navMenu.contains(e.target);
+            const isClickOnToggle = mobileMenuToggle && mobileMenuToggle.contains(e.target);
+            
+            if (!isClickInsideMenu && !isClickOnToggle) {
+                closeMobileMenu();
+            }
+        }
+    });
+
+    // Đóng menu khi nhấn ESC key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && navMenu && navMenu.classList.contains('active')) {
+            closeMobileMenu();
+        }
     });
 }

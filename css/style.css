@@ -72,14 +72,49 @@ nav .logo {
     margin-right: 15px;
     object-fit: cover;
 }
-nav ul {
+/* Mobile Menu Toggle Button */
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px;
+    position: relative;
+    z-index: 101;
+}
+
+.hamburger-line {
+    width: 25px;
+    height: 3px;
+    background-color: var(--text-light);
+    margin: 3px 0;
+    transition: 0.3s;
+    transform-origin: center;
+}
+
+/* Hamburger Animation */
+.mobile-menu-toggle.active .hamburger-line:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.mobile-menu-toggle.active .hamburger-line:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-toggle.active .hamburger-line:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Navigation Menu */
+.nav-menu {
     display: flex;
     list-style: none;
 }
-nav ul li {
+.nav-menu li {
     margin-left: 25px;
 }
-nav ul li a {
+.nav-menu li a {
     color: var(--text-light);
     text-decoration: none;
     padding: 10px;
@@ -87,7 +122,7 @@ nav ul li a {
     transition: color 0.3s, text-shadow 0.3s;
     cursor: pointer;
 }
-nav ul li a:hover, nav ul li a.active {
+.nav-menu li a:hover, .nav-menu li a.active {
     color: var(--accent-color);
     text-shadow: 0 0 10px var(--accent-color);
 }
@@ -302,11 +337,52 @@ h1, h2, h3 {
 }
 /* Responsive */
 @media (max-width: 768px) {
-    nav ul {
-display: none; /* Simple hide for mobile, can be replaced with hamburger menu */
+    /* Show hamburger menu on mobile */
+    .mobile-menu-toggle {
+        display: flex;
     }
+    
+    /* Mobile Navigation Menu */
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(10, 10, 26, 0.98);
+        backdrop-filter: blur(20px);
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: right 0.3s ease-in-out;
+        z-index: 100;
+    }
+    
+    .nav-menu.active {
+        right: 0;
+    }
+    
+    .nav-menu li {
+        margin: 20px 0;
+        margin-left: 0;
+    }
+    
+    .nav-menu li a {
+        font-size: 1.5rem;
+        padding: 15px 20px;
+        display: block;
+        text-align: center;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        width: 200px;
+    }
+    
+    .nav-menu li a:hover {
+        background-color: var(--accent-hover);
+        border-radius: 4px;
+    }
+    
     .about-content {
-grid-template-columns: 1fr;
+        grid-template-columns: 1fr;
     }
     
     .loading-container {
