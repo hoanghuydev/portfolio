@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trần Võ Hoàng Huy - Fullstack Developer Portfolio</title>
     <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/loading.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/GLTFLoader.js"></script>
@@ -16,7 +17,38 @@
     <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/postprocessing/UnrealBloomPass.js"></script>
     
 </head>
-<body>
+<body class="loading">
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="loading-container">
+            <div class="loading-logo">
+                <img src="images/avatar.jpg" alt="Loading Avatar" class="loading-avatar">
+                <h2>Trần Võ Hoàng Huy</h2>
+                <p>Portfolio đang được tải...</p>
+            </div>
+            <div class="loading-progress">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progress-fill"></div>
+                </div>
+                <div class="progress-text">
+                    <span id="progress-percentage">0%</span>
+                    <span id="loading-status">Đang khởi tạo...</span>
+                </div>
+            </div>
+            <div class="loading-animation">
+                <div class="orbit">
+                    <div class="planet"></div>
+                </div>
+                <div class="orbit orbit-2">
+                    <div class="planet planet-2"></div>
+                </div>
+                <div class="orbit orbit-3">
+                    <div class="planet planet-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <canvas id="bg-canvas"></canvas>
 
     <header>
@@ -198,7 +230,9 @@
     </main>
     
     <!-- JavaScript Files -->
+    <script src="/js/error-handler.js"></script>
     <script src="/js/utils.js"></script>
+    <script src="/js/performance.js"></script>
     <script src="/js/models/satellite.js"></script>
     <script src="/js/models/earth.js"></script>
     <script src="/js/models/mars.js"></script>

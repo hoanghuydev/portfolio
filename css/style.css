@@ -307,4 +307,21 @@ display: none; /* Simple hide for mobile, can be replaced with hamburger menu */
     .about-content {
 grid-template-columns: 1fr;
     }
+    
+    .loading-container {
+        padding: 20px;
+    }
+    
+    .loading-progress {
+        width: 250px;
+    }
+    
+    .loading-avatar {
+        width: 60px;
+        height: 60px;
+    }
+    
+    .loading-logo h2 {
+        font-size: 1.4rem;
+    }
 }

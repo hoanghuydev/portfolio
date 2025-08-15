@@ -18,29 +18,26 @@ function init3D() {
     // 3. Tạo các vì sao nền
     createStars();
     
-    // 3. Tạo vũ trụ nền
+    // 4. Tạo vũ trụ nền (tạo sớm để có background)
     createUniverse();
     
-    // 4. Tải tất cả các model 3D
-    loadAllModels();
+    // 5. Khởi tạo performance optimizer
+    initPerformanceOptimizer();
     
-    // 5. Thiết lập event listeners
+    // 6. Thiết lập event listeners (không bao gồm animation)
     setupEventListeners();
     
-    // 6. Bắt đầu animation loop
-    startAnimation();
+    // 7. Bắt đầu preload tất cả assets
+    preloadAllAssets();
 }
 
 /**
- * Tải tất cả các model 3D cho các trang
+ * Tải tất cả các model 3D cho các trang (đã được thay thế bằng preloadAllAssets)
+ * Giữ lại để tương thích ngược
  */
 function loadAllModels() {
-    loadSatellite();
-    loadEarthModel();
-    loadMarsModel();
-    loadSaturnModel();
-    loadUranusModel();
-    loadSpaceship();
+    // Function này đã được thay thế bằng preloadAllAssets() trong utils.js
+    // Tất cả models sẽ được preload trong preloadAllAssets()
 }
 
 /**

@@ -1,22 +1,27 @@
 // satellite.js - Satellite model loading and animation for home page
 /**
  * Tải và thiết lập vệ tinh cho Trái Đất
+ * (Đã được tích hợp vào preloadAllAssets)
  */
 function loadSatellite() {
-    const loader = new THREE.GLTFLoader();
+    // Satellite đã được preload trong preloadAllAssets()
+    // Function này được giữ lại để tương thích ngược
     
-    loader.load('model/satellite.glb', (gltf) => {
-        satellite = gltf.scene;
-        satellite.scale.set(5, 5, 5);
-        
-        // Thêm vệ tinh vào Trái Đất sau khi Trái Đất đã được tải
-        const checkEarthLoaded = setInterval(() => {
-            if (planets.earth) {
-                planets.earth.add(satellite);
-                clearInterval(checkEarthLoaded);
-            }
-        }, 100);
-    });
+    // Nếu satellite chưa được load, load nó với gltfLoader global
+    if (!satellite && gltfLoader) {
+        gltfLoader.load('model/satellite.glb', (gltf) => {
+            satellite = gltf.scene;
+            satellite.scale.set(0.05, 0.05, 0.05);
+            
+            // Thêm vệ tinh vào Trái Đất sau khi Trái Đất đã được tải
+            const checkEarthLoaded = setInterval(() => {
+                if (planets.earth) {
+                    planets.earth.add(satellite);
+                    clearInterval(checkEarthLoaded);
+                }
+            }, 100);
+        });
+    }
 }
 
 /**

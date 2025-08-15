@@ -1,29 +1,34 @@
 // js/models/spaceship.js
 
-let spaceship = null;
-let spaceshipNavigating = false; // Flag để kiểm soát khi phi thuyền đang điều hướng
+// spaceship và spaceshipNavigating đã được khai báo global trong utils.js
 
 /**
  * Tải model phi thuyền không gian
+ * (Đã được tích hợp vào preloadAllAssets)
  */
 function loadSpaceship() {
-    const loader = new THREE.GLTFLoader();
-    loader.load(
-        'model/spaceship.glb',
-        (gltf) => {
-            spaceship = gltf.scene;
-            spaceship.scale.set(2.3, 2.3, 2.3); 
-            
-            // Đặt vị trí ban đầu của phi thuyền ở trước camera
-            updateSpaceshipPosition();
-            
-            scene.add(spaceship);
-        },
-        undefined,
-        (error) => {
-            console.error('Lỗi khi tải model phi thuyền:', error);
-        }
-    );
+    // Spaceship đã được preload trong preloadAllAssets()
+    // Function này được giữ lại để tương thích ngược
+    
+    // Nếu spaceship chưa được load, load nó với gltfLoader global
+    if (!spaceship && gltfLoader) {
+        gltfLoader.load(
+            'model/spaceship.glb',
+            (gltf) => {
+                spaceship = gltf.scene;
+                spaceship.scale.set(2.3, 2.3, 2.3);
+                
+                // Đặt vị trí ban đầu của phi thuyền ở trước camera
+                updateSpaceshipPosition();
+                
+                scene.add(spaceship);
+            },
+            undefined,
+            (error) => {
+                console.error('Lỗi khi tải model phi thuyền:', error);
+            }
+        );
+    }
 }
 
 /**

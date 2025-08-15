@@ -40,5 +40,7 @@ function animate() {
  * Khởi tạo và bắt đầu vòng lặp animation
  */
 function startAnimation() {
-    animate();
+    if (isLoaded) {
+        animate();
+    }
 }
