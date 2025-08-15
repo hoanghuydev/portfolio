@@ -1,6 +1,7 @@
 // js/models/spaceship.js
 
 let spaceship = null;
+let spaceshipNavigating = false; // Flag để kiểm soát khi phi thuyền đang điều hướng
 
 /**
  * Tải model phi thuyền không gian
@@ -49,9 +50,11 @@ function updateSpaceshipPosition() {
     const position = new THREE.Vector3().copy(camera.position).add(offset);
     spaceship.position.copy(position);
 
-    // Hướng phi thuyền về phía trước, hơi hướng lên trên
-    const lookAtPosition = new THREE.Vector3().copy(position)
-        .add(cameraDirection.multiplyScalar(1))
-        .add(up.multiplyScalar(0.1));
-    spaceship.lookAt(lookAtPosition);
+    // Chỉ thay đổi hướng khi không đang điều hướng tới hành tinh khác
+    if (!spaceshipNavigating) {
+        const lookAtPosition = new THREE.Vector3().copy(position)
+            .add(cameraDirection.multiplyScalar(1))
+            .add(up.multiplyScalar(0.1));
+        spaceship.lookAt(lookAtPosition);
+    }
 }

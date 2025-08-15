@@ -41,11 +41,7 @@ function switchPage(pageId) {
         y: targetData.cameraPosition.y,
         z: targetData.cameraPosition.z,
         duration: 2.8,
-        ease: 'power3.inOut',
-        onUpdate: () => {
-            // Cập nhật vị trí phi thuyền trong suốt quá trình di chuyển
-            updateSpaceshipPosition();
-        }
+        ease: 'power3.inOut'
     });
 
     gsap.to(controlsTarget, {
@@ -61,33 +57,48 @@ function switchPage(pageId) {
 
     // Thêm animation cho phi thuyền bay về phía hành tinh
     if (spaceship) {
+        // Đánh dấu phi thuyền đang điều hướng
+        spaceshipNavigating = true;
+        
+        // Vị trí hành tinh mục tiêu
+        const targetPlanetPosition = new THREE.Vector3(
+            targetData.lookAt.x,
+            targetData.lookAt.y,
+            targetData.lookAt.z
+        );
+
         gsap.to(spaceship.position, {
             x: targetData.cameraPosition.x,
             y: targetData.cameraPosition.y,
             z: targetData.cameraPosition.z,
             duration: 2.5, // Ngắn hơn camera một chút để tạo cảm giác phi thuyền dẫn đầu
             ease: 'power3.inOut',
+            onStart: () => {
+                spaceshipNavigating = true;
+            },
+            onUpdate: () => {
+                // Trong suốt quá trình di chuyển, luôn hướng mũi phi thuyền về hành tinh mục tiêu
+                if (spaceship) {
+                    // Lưu quaternion hiện tại
+                    const currentQuaternion = spaceship.quaternion.clone();
+                    
+                    // Sử dụng lookAt trực tiếp để xác định hướng đúng
+                    spaceship.lookAt(targetPlanetPosition);
+                    const targetQuaternion = spaceship.quaternion.clone();
+                    
+                    // Khôi phục quaternion hiện tại
+                    spaceship.quaternion.copy(currentQuaternion);
+                    
+                    // Xoay từ từ bằng slerp
+                    spaceship.quaternion.slerp(targetQuaternion, 0.05);
+                }
+            },
             onComplete: () => {
+                // Kết thúc điều hướng
+                spaceshipNavigating = false;
                 // Sau khi đến nơi, cập nhật lại vị trí phi thuyền trước camera
                 updateSpaceshipPosition();
             }
-        });
-
-        // Hướng phi thuyền về phía hành tinh
-        const targetPosition = new THREE.Vector3(
-            targetData.lookAt.x,
-            targetData.lookAt.y,
-            targetData.lookAt.z
-        );
-        gsap.to(spaceship.rotation, {
-            ...new THREE.Euler().setFromQuaternion(
-                new THREE.Quaternion().setFromUnitVectors(
-                    new THREE.Vector3(0, 0, 1),
-                    targetPosition.clone().sub(spaceship.position).normalize()
-                )
-            ),
-            duration: 1,
-            ease: 'power3.inOut'
         });
     }
 
