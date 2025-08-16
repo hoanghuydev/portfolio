@@ -305,7 +305,7 @@ function createUniverse() {
         universeTexture.wrapT = THREE.RepeatWrapping;
         universeTexture.repeat.set(1, 1);
 
-        const geometry = new THREE.SphereGeometry(200, 64, 64); 
+        const geometry = new THREE.SphereGeometry(400, 64, 64); 
         const material = new THREE.MeshBasicMaterial({
             map: universeTexture,
             side: THREE.BackSide 
